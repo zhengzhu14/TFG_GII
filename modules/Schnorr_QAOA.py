@@ -47,7 +47,7 @@ class SchnorrAlgQAOA:
 
         print(f'El numero de bits de N = {N} es m = {self.m}')
         print(f'La dimension del reticulo que vamos a tratar es n = {self.n}')
-        print(f'La cota smooth vamos a tomar: {self.smooth_bound}')
+        print(f'La cota smooth que vamos a tomar: {self.smooth_bound}')
 
     
     #Metodos privados
@@ -74,7 +74,7 @@ class SchnorrAlgQAOA:
         np.fill_diagonal(B, f)
 
         # Crear la ultima fila de la matriz
-        final_row = np.round(q ** self.c * np.log(np.array(self.prime_basis)))
+        final_row = np.round(q ** self.c * np.log(np.array(primes[:self.n])))
         B = np.vstack((B, final_row))
         
         # fpylll solo acepta listas
@@ -108,7 +108,7 @@ class SchnorrAlgQAOA:
     def lll_reduced(self, B, delta = 0.75, fpylll = True):
         if fpylll:
             D = deepcopy(B)
-            LLL.reduced(D, delta)
+            LLL.reduction(D, delta)
             return D
         else:
             Bmatrix = self.integet_to_matrix(B)
@@ -278,7 +278,7 @@ class SchnorrAlgQAOA:
 
         aux = np.multiply(step_signs, bits)
 
-        movement = aux @ D.T
+        movement = aux @ D
         
 
         vnew = b_op + movement
@@ -302,31 +302,34 @@ class SchnorrAlgQAOA:
 
 
     def vectors2uv_pairs(self, B, vectors):
+        first_n_primes = primes[:self.n]
 
         B_inv = np.linalg.pinv(B)
 
-        exponentes = np.rint(vectors @ B_inv.T).astype(int) #Obtengo el vector con los exponentes
+        exponentes = np.rint(vectors @ B_inv).astype(int) #Obtengo el vector con los exponentes
 
         u_exp = np.where(exponentes > 0, exponentes, 0) #Obtengo los exponentes positivos
         v_exp = np.where(exponentes < 0, -exponentes, 0) #Obtengo los exponentes negativos y les cambio de signo
 
         #Obtengo los valores u y v
-        u = np.prod(np.power(self.prime_basis, u_exp, dtype = object), axis = 1) 
-        v = np.prod(np.power(self.prime_basis, v_exp, dtype = object), axis = 1)
+        u = np.prod(np.power(first_n_primes, u_exp, dtype = object), axis = 1) 
+        v = np.prod(np.power(first_n_primes, v_exp, dtype = object), axis = 1)
         
 
         return np.stack((u, v), axis = 1)
 
 
-    def uv_pairs2sr_pairs(self, uv_pairs,):
+    def uv_pairs2sr_pairs(self, uv_pairs):
 
-        sr_pairs = [tuple(u_v) for u_v in uv_pairs if self.is_smooth(abs(int(u_v[0]) - self.N*int(u_v[1])), self.n)]
+        sr_pairs = [tuple(u_v) for u_v in uv_pairs if self.is_smooth(abs(int(u_v[0]) - self.N*int(u_v[1])))]
 
         return sr_pairs
 
+    def get_probs(self, results, shots):
 
+        return [count/shots for count in results.values()]
 
-    #Getters y setters
+    #Getters
     def get_N (self):
         return self.N
     def get_c(self):
@@ -340,10 +343,17 @@ class SchnorrAlgQAOA:
     def get_smoothbound(self):
         return self.smooth_bound
     
+
+    #Setters
     def set_random_seed(self, seed):
         self.seed = seed
         np.random(self.seed)
+
+    def set_n(self, n):
+        self.n = n
     
+    def set_smoothbound(self, smoothbound):
+        self.smooth_bound = smoothbound
 
 
     
