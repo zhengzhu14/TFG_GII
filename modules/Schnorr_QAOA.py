@@ -13,6 +13,10 @@ from qiskit_optimization.translators import from_docplex_mp
 from qiskit_optimization.converters import QuadraticProgramToQubo
 
 
+from qiskit_aer import AerSimulator
+from qiskit_aer.primitives import EstimatorV2, SamplerV2
+from qiskit.transpiler import generate_preset_pass_manager
+
 from qiskit.primitives import StatevectorSampler, StatevectorEstimator
 from qiskit.visualization import plot_histogram
 
@@ -44,6 +48,9 @@ class SchnorrAlgQAOA:
         self.smooth_bound = self.n**2
 
         self.prime_basis = primes[:self.smooth_bound]
+
+        self.pass_manager = generate_preset_pass_manager(3, AerSimulator())
+
 
         print(f'El numero de bits de N = {N} es m = {self.m}')
         print(f'La dimension del reticulo que vamos a tratar es n = {self.n}')
@@ -218,16 +225,21 @@ class SchnorrAlgQAOA:
         """
         TODO
         """
-        parameters = circuit.parameters
+
+        isa_circuit = self.pass_manager.run(circuit)
+
+        parameters = isa_circuit.parameters
         #Obtengo parametros = ParameterView([Parameter(beta[]0),.., Parameter(alfa[0]),.., Parameter[alfa[n - 1]]])
 
         #num_parameters = circuit.num_parameters
 
-        simulator = StatevectorEstimator() #Instancio el simulador exacto sin ruido
+        simulator = EstimatorV2(options = {'backend_options': 
+                                           {'method': 'statevector'
+                                            }}) #Instancio el simulador exacto sin ruido
 
         def func_to_minimize(x):
 
-            job = simulator.run([(circuit, Hc, x)])
+            job = simulator.run([(isa_circuit, Hc, x)])
             result = job.result()[0]
             
             #print(result.data.evs)
@@ -325,9 +337,9 @@ class SchnorrAlgQAOA:
 
         return sr_pairs
 
-    def get_probs(self, results, shots):
+    def get_probs(self, counts, shots):
 
-        return [count/shots for count in results.values()]
+        return [count/shots for count in counts]
 
     #Getters
     def get_N (self):
