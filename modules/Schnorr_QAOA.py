@@ -17,6 +17,7 @@ from qiskit_aer import AerSimulator
 from qiskit_aer.primitives import EstimatorV2, SamplerV2
 from qiskit.transpiler import generate_preset_pass_manager
 
+
 from qiskit.primitives import StatevectorSampler, StatevectorEstimator
 from qiskit.visualization import plot_histogram
 
@@ -33,7 +34,7 @@ primes = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97
 
 class SchnorrAlgQAOA:
     #TODO
-    def __init__(self, N, c, l, seed):
+    def __init__(self, N, c, l, seed, verbose = True):
         self.N = N
 
         self.c = c
@@ -82,6 +83,7 @@ class SchnorrAlgQAOA:
 
         # Crear la ultima fila de la matriz
         final_row = np.round(q ** self.c * np.log(np.array(primes[:self.n])))
+       
         B = np.vstack((B, final_row))
         
         # fpylll solo acepta listas
@@ -231,7 +233,6 @@ class SchnorrAlgQAOA:
         parameters = isa_circuit.parameters
         #Obtengo parametros = ParameterView([Parameter(beta[]0),.., Parameter(alfa[0]),.., Parameter[alfa[n - 1]]])
 
-        #num_parameters = circuit.num_parameters
 
         simulator = EstimatorV2(options = {'backend_options': 
                                            {'method': 'statevector'
@@ -245,7 +246,6 @@ class SchnorrAlgQAOA:
             #print(result.data.evs)
             return result.data.evs
         
-        #x0 = np.asarray([0.0]*num_parameters) #Parametros iniciales
 
         result = minimize(func_to_minimize, x0, method = min_method)
 
@@ -262,13 +262,19 @@ class SchnorrAlgQAOA:
         TODO
         """
 
-        sampler = StatevectorSampler() #Declaro un Sampler exacto
+        sampler = SamplerV2() #Declaro un Sampler exacto
 
-        circWithParam = circuit.assign_parameters(opt_parameters)
 
-        circWithParam.measure_all()
+        isa_circuit = self.pass_manager.run(circuit)
+        
+        isa_circuit.measure_all()
 
-        job = sampler.run([(circWithParam, None)], shots = shots)
+        parameter_values = [opt_parameters[p] for p in isa_circuit.parameters]
+
+        pub = (isa_circuit, parameter_values)
+
+
+        job = sampler.run([pub], shots = shots)
         
         result = job.result()[0] 
 
@@ -280,7 +286,7 @@ class SchnorrAlgQAOA:
     
     
     def bitstrings2vector(self, bitstrings):
-        return np.array([[int(c) for c in bstring] for bstring in bitstrings])
+        return np.array([[int(c) for c in reversed(bstring)] for bstring in bitstrings])
 
     def bitstring2latticeVectors(self, D, state_bistrings, step_signs, b_op):
         """
@@ -303,6 +309,14 @@ class SchnorrAlgQAOA:
         distances = [np.linalg.norm(vector) for vector in res_vectors]
 
         return distances
+    
+
+    def get_distances2(self, vnew, t):
+        res_vector = np.subtract(vnew, t)
+
+        distances2 = [np.dot(vector, vector) for vector in res_vector]
+
+        return distances2
 
 
     def is_smooth(self, u):
@@ -366,6 +380,7 @@ class SchnorrAlgQAOA:
     
     def set_smoothbound(self, smoothbound):
         self.smooth_bound = smoothbound
+        self.prime_basis = primes[:self.smooth_bound]
 
 
     

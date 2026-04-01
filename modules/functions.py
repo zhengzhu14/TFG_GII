@@ -1,5 +1,5 @@
 
-from Schnorr_QAOA import SchnorrAlgQAOA
+from modules.Schnorr_QAOA import SchnorrAlgQAOA
 
 #Importaciones basicas
 import numpy as np
@@ -28,7 +28,7 @@ from qiskit.circuit.library import QAOAAnsatz
 from qiskit.circuit import QuantumCircuit, Parameter
 
 
-def solve_cvp (cvp : SchnorrAlgQAOA, x0 : np.array, delta = 0.75, shots = 1_000, q = 10, p = 1):
+def solve_cvp (cvp : SchnorrAlgQAOA, x0 = None, delta = 0.75, shots = 1_000, q = 10, p = 1):
     """
     param cvp: SchnorrAlgQAOA() clase con los datos necesarios y las funciones de cálculo
 
@@ -38,6 +38,8 @@ def solve_cvp (cvp : SchnorrAlgQAOA, x0 : np.array, delta = 0.75, shots = 1_000,
     B, t = cvp.generate_cvp(q)
 
     D, b_op, res_vector, step_signs, w, dist  = cvp.babai_algorithm(B, t, delta)
+
+    dist2 = np.dot(res_vector, res_vector)
 
     qubo = cvp.define_qubo(D, res_vector, step_signs)
 
@@ -53,11 +55,9 @@ def solve_cvp (cvp : SchnorrAlgQAOA, x0 : np.array, delta = 0.75, shots = 1_000,
 
     vnew = cvp.bitstring2latticeVectors(nD, results.keys(), step_signs, b_op)
 
-    distances = cvp.get_distances(vnew, t)
+    distances2 = cvp.get_distances2(vnew, t)
 
     probs = cvp.get_probs(results.values(), shots)
 
-    
 
-
-    pass
+    return vnew, b_op, dist2, t, distances2, probs, {parameter[0].name: parameter[1] for parameter in optParameters.items()}
