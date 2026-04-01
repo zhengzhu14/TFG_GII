@@ -354,6 +354,18 @@ class SchnorrAlgQAOA:
     def get_probs(self, counts, shots):
 
         return [count/shots for count in counts]
+    
+    def prettyprint(self, vnews, distances, probs, b_op, t, res_vector, distT_B):
+        print(f"Vector más corto por algoritmo de Babai: \nb_op = {b_op}\n")
+        print(f"El vector residual \nt - b_op = {res_vector}\n")
+        print(f"La distancia |t - b_op| = {distT_B:.3f}\n")
+
+        total_count = len(vnews)
+
+        for i in range(total_count):
+            print(f"{i}: Prob = {probs[i]:.5f}\n\tvnew = {vnews[i]} con distancia: {distances[i]:.3f}")
+        
+        
 
     #Getters
     def get_N (self):
