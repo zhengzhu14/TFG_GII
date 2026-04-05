@@ -1,5 +1,5 @@
 
-from modules.Schnorr_QAOA import SchnorrAlgQAOA
+from modules.schnorr_lattice import SchnorrAlgQAOA
 
 #Importaciones basicas
 import numpy as np
@@ -43,7 +43,7 @@ def solve_cvp (cvp : SchnorrAlgQAOA, x0 = None, delta = 0.75, shots = 1_000, q =
 
     qubo = cvp.define_qubo(D, res_vector, step_signs)
 
-    Hc, offset = cvp.define_hamiltonian(qubo)
+    Hc, _ = cvp.define_hamiltonian(qubo)
 
     circuit = cvp.construct_circuit(Hc, reps = p)
 
