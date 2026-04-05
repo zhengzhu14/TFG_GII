@@ -39,9 +39,11 @@ def vectors2uv_pairs(B, vectors, n):
 
 def uv_pairs2sr_pairs(uv_pairs, N, smooth_bound):
 
-    sr_pairs = [tuple(u_v) for u_v in uv_pairs if is_smooth(
-                                                            abs(int(u_v[0]) - N*int(u_v[1])),
-                                                            smooth_bound
-                                                            )]
+    aux = [int(u_v[0]) - N*int(u_v[1]) for u_v in uv_pairs]
+
+    sr_pairs = [(tuple(u_v), sr) for u_v, sr in zip(uv_pairs, aux) if is_smooth(
+                                                                            abs(sr),
+                                                                            smooth_bound
+                                                                            )]
 
     return sr_pairs

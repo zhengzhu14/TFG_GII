@@ -1,6 +1,3 @@
-
-from modules.schnorr_lattice import SchnorrAlgQAOA
-
 #Importaciones basicas
 import numpy as np
 from copy import deepcopy
@@ -10,25 +7,14 @@ import matplotlib.pyplot as plt
 from fpylll import IntegerMatrix, LLL, GSO
 from docplex.mp.model import Model
 
-#Librerias de Qiskit
-from qiskit_optimization import QuadraticProgram
-from qiskit_optimization.translators import from_docplex_mp
-from qiskit_optimization.converters import QuadraticProgramToQubo
+
+from modules import schnorr_lattice as sl
+from modules import qaoa as q
+from modules import teoria_numeros as tn
+from modules import utils
 
 
-from qiskit_aer import AerSimulator
-from qiskit_aer.primitives import EstimatorV2, SamplerV2
-from qiskit.transpiler import generate_preset_pass_manager
-
-from qiskit.primitives import StatevectorSampler, StatevectorEstimator
-from qiskit.visualization import plot_histogram
-
-
-from qiskit.circuit.library import QAOAAnsatz
-from qiskit.circuit import QuantumCircuit, Parameter
-
-
-def solve_cvp (cvp : SchnorrAlgQAOA, x0 = None, delta = 0.75, shots = 1_000, q = 10, p = 1):
+def solve_cvp (cvp : sl.schnorrCVP, x0 = None, delta = 0.75, shots = 1_000, q = 10, p = 1):
     """
     param cvp: SchnorrAlgQAOA() clase con los datos necesarios y las funciones de cálculo
 
