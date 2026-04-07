@@ -17,8 +17,6 @@ from docplex.mp.model import Model
 from scipy.optimize import minimize, OptimizeResult
 
 
-
-
 class QaoaMonitor:
     def __init__ (self):
         self.iteration = 0
@@ -121,10 +119,11 @@ def qaoa_algorithm(circuit, Hc, x0, min_method = 'Nelder-Mead'):
     
     monitor = QaoaMonitor()
     
-
     result = minimize(func_to_minimize, x0, method = min_method, callback = monitor.callback)
 
     return monitor, {param.name: val for param, val in zip(parameters, result.x)}
+
+
 
 def circ_asign_params(circuit, parameters):
         ncircuit = circuit.assign_parameters(parameters)

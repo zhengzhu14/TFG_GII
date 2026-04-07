@@ -196,7 +196,7 @@ class schnorrCVP:
     def get_valor_by_factors(self, factors):
         Y = 1
         for i, p in enumerate(self.basis):
-            Y = Y * pow(p, int(factors[i + 1]) // 2, self.N)
+            Y = Y * pow(p, int(factors[i + 1]), self.N)
         
         Y = Y % self.N
         
