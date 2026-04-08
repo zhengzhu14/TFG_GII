@@ -90,6 +90,20 @@ def construct_circuit(Hc, reps = 1):
 
     return circuit
 
+def evaluate_params(circuit, Hc, x):
+
+    simulator = EstimatorV2(options = {'backend_options': 
+                                            {'method': 'statevector',
+                                             'device': 'CPU',
+                                             'max_parallel_threads': 8
+                                            }})
+    
+    pub = (circuit, Hc, x)
+
+    result = simulator.run([pub]).result()[0].data.evs
+    
+    return result
+
 
 def qaoa_algorithm(circuit, Hc, x0, min_method = 'Nelder-Mead'):
     """

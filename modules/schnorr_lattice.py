@@ -79,7 +79,7 @@ class schnorrCVP:
         if diagonal == None:
             f = np.random.permutation([(i + 1) // 2 for i in range(1, self.n + 1)])
         else:
-            f = np.array(diagonal)
+            f = np.asarray(diagonal)
 
         # Crear una matriz de 0s y añadir en la diagonal la permutación escogida
         B = np.zeros(shape=(self.n, self.n))
