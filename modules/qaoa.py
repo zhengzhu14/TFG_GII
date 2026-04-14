@@ -1,5 +1,4 @@
 #Librerias de Qiskit
-from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.translators import from_docplex_mp
 
 
@@ -8,13 +7,14 @@ from qiskit_aer.primitives import EstimatorV2, SamplerV2
 from qiskit.transpiler import generate_preset_pass_manager
 
 
-from qiskit.circuit.library import QAOAAnsatz, qaoa_ansatz
-from qiskit.circuit import QuantumCircuit, Parameter
+from qiskit.circuit.library import qaoa_ansatz
 
 
 from docplex.mp.model import Model
 
 from scipy.optimize import minimize, OptimizeResult
+
+import numpy as np
 
 
 class QaoaMonitor:
@@ -32,8 +32,6 @@ class QaoaMonitor:
         
 
     
-
-
 
 #Funciones de la parte del QAOA
 def define_qubo(D, residual_vector, step_signs, n): 
@@ -90,6 +88,13 @@ def construct_circuit(Hc, reps = 1):
 
     return circuit
 
+
+
+def circ_asign_params(circuit, parameters):
+        ncircuit = circuit.assign_parameters(parameters)
+        return ncircuit
+
+
 def evaluate_params(circuit, Hc, x):
 
     simulator = EstimatorV2(options = {'backend_options': 
@@ -104,15 +109,10 @@ def evaluate_params(circuit, Hc, x):
     
     return result
 
-
-def qaoa_algorithm(circuit, Hc, x0, min_method = 'Nelder-Mead'):
+def qaoa_algorithm(circuit, Hc, x0 = None, min_method = 'Nelder-Mead'):
     """
     TODO
     """
-
-    parameters = circuit.parameters
-    #Obtengo parametros = ParameterView([Parameter(beta[]0),.., Parameter(alfa[0]),.., Parameter[alfa[n - 1]]])
-
 
     simulator = EstimatorV2(options = {'backend_options': 
                                             {'method': 'statevector',
@@ -121,27 +121,26 @@ def qaoa_algorithm(circuit, Hc, x0, min_method = 'Nelder-Mead'):
                                             }}) #Instancio el simulador exacto sin ruido
 
     def func_to_minimize(x):
-
         job = simulator.run([(circuit, Hc, x)])
         result = job.result()[0]
         
         energy  = float(result.data.evs)
-        #print(result.data.evs)
         return energy
     
-
     
     monitor = QaoaMonitor()
+
+    parameters = circuit.parameters
+    p2 = len(parameters)
+
+    if x0 is None:
+        x0 = np.asarray([0.0]*p2)
     
     result = minimize(func_to_minimize, x0, method = min_method, callback = monitor.callback)
 
     return monitor, {param.name: val for param, val in zip(parameters, result.x)}
 
 
-
-def circ_asign_params(circuit, parameters):
-        ncircuit = circuit.assign_parameters(parameters)
-        return ncircuit
 
 
 def sample_from_parameters(circuit, opt_parameters, shots):
@@ -155,9 +154,9 @@ def sample_from_parameters(circuit, opt_parameters, shots):
 
     ncircuit.measure_all()
 
-    parameter_values = [opt_parameters[p.name] for p in circuit.parameters]
+    #parameter_values = [opt_parameters[p.name] for p in circuit.parameters]
 
-    pub = (ncircuit, parameter_values)
+    pub = (ncircuit, opt_parameters)
 
 
     job = sampler.run([pub], shots = shots)

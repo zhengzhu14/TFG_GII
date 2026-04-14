@@ -13,6 +13,14 @@ def get_distances(vnew, t):
     return distances
 
 
+def get_distances2(vnew, t):
+    res_vectors = np.subtract(vnew, t)
+
+    distances2 = [np.dot(vector, vector) for vector in res_vectors]
+
+    return distances2
+
+
 def prettyprint(vnews, distances, probs, b_op, res_vector):
     distT_B = np.linalg.norm(res_vector)
 
