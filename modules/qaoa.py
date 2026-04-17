@@ -19,16 +19,22 @@ import numpy as np
 
 class QaoaMonitor:
     def __init__ (self):
-        self.iteration = 0
         self.evaluation = []
         self.parameters = []
+        self.total_evaluations = 0
+        self.total_iterations = 0
         
     
     
     def callback(self, intermediate_result: OptimizeResult):
-        self.iteration = self.iteration + 1
         self.evaluation.append(intermediate_result.fun)
         self.parameters.append(intermediate_result.x)
+
+    def set_total_evaluations(self, evaluations):
+        self.total_evaluations = evaluations
+
+    def set_total_iterations(self, iterations):
+        self.total_iterations = iterations
         
 
     
@@ -137,6 +143,13 @@ def qaoa_algorithm(circuit, Hc, x0 = None, min_method = 'Nelder-Mead'):
         x0 = np.asarray([0.0]*p2)
     
     result = minimize(func_to_minimize, x0, method = min_method, callback = monitor.callback)
+
+    if result.success:
+        print(result.x)
+        print(result.message)
+        monitor.set_total_evaluations(result.nfev)
+        #monitor.set_total_iterations(result.nit)
+    monitor.callback(result)
 
     return monitor, {param.name: val for param, val in zip(parameters, result.x)}
 
