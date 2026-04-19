@@ -32,15 +32,16 @@ class schnorrCVPResult:
 
 class schnorrCVP:
 
-    def __init__(self, N, c, l, seed: int, set_seed: bool = True, verbose = True):
+    def __init__(self, N, c, l, seed, set_seed = True, verbose = True):
         self.N = N
 
         self.c = c
 
         self.seed = seed
         if set_seed:
-            np.random.seed(self.seed)
-            
+            np.random.seed = seed
+        
+        
 
         self.l = l
 
@@ -217,7 +218,7 @@ class schnorrCVP:
     #Setters
     def set_random_seed(self, seed):
         self.seed = seed
-        np.random(self.seed)
+        np.random.seed = self.seed
 
     def set_n(self, n):
         self.n = n
