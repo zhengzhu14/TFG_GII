@@ -171,4 +171,12 @@ def sample_from_parameters(circuit, opt_parameters, shots):
     return ordered_counts
 
 
+def normalize_hamiltonian(Hc):
+    norma = np.max(np.abs(Hc.coeffs))
+
+    nHc = Hc.copy()
+
+    nHc.coeffs = nHc.coeffs / norma
+
+    return nHc, norma
 

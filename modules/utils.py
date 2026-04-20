@@ -1,4 +1,7 @@
 import numpy as np
+from Crypto.Util import number
+import random
+
 
 
 def get_probs(counts, shots):
@@ -32,3 +35,30 @@ def prettyprint(vnews, distances, probs, b_op, res_vector):
 
     for i in range(total_count):
         print(f"{i}: Prob = {probs[i]:.5f}\n\tvnew = {vnews[i]} con distancia: {distances[i]:.3f}")
+
+
+def generate_N(bitLength):
+    """
+    param bitLength: cantidad de bits de N
+
+    return: N = p*q de bitLength bits
+    """
+    
+
+    min_p_bit_length = max(2, bitLength // 4)
+    max_p_bit_length = bitLength - min_p_bit_length
+
+
+    while True:
+        p_bit_length = random.randint(min_p_bit_length, max_p_bit_length)
+
+        p = number.getPrime(p_bit_length)
+
+        q_bit_length = bitLength - p_bit_length + 1
+
+        q = number.getPrime(q_bit_length)
+
+        N = p * q
+
+        if N.bit_length() == bitLength:
+            return N
