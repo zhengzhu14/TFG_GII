@@ -50,7 +50,8 @@ def solve_cvp (
 
 def solve_cvp_with_opt_paramters(
     cvp : sl.schnorrCVP, instance: sl.schnorrCVPInstance,
-    opt_parameters, delta = 0.75, shots = 10_000, p = 1
+    opt_parameters, delta = 0.75, shots = 10_000, normalize: bool = False,
+    p = 1
 ):
     """
     TODO
@@ -60,6 +61,10 @@ def solve_cvp_with_opt_paramters(
 
     qubo = qaoa.define_qubo(babai_result.D, babai_result.res_vector, babai_result.step_sign, cvp.n)
     Hc, _ = qaoa.define_hamiltonian(qubo)
+
+    if normalize:
+        Hc, _ = qaoa.normalize_hamiltonian(Hc)
+
     circuit = qaoa.construct_circuit(Hc, p)
 
     #Nos ahorramos la parte de la optimizacion clasica
