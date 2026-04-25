@@ -1,257 +1,241 @@
 Se va factorizar N = 48567227; c (parametro de precision) = 4; l = 1.5; lattice dimension = 8; smooth bound = 128; numero de pares = 130; max_iteraciones = 256
-Iteracion 0/256 encontrado 14 SR Pairs. Encontrados 14 nuevos pares consiguiendo 14/130.
-Babai tarda: 0.513 ms
-La definicion del problema tarda: 10.011 ms
-QAOA tarda: 1218.543 ms
-Samplear tarda: 30.820 ms
-Obtener los SR-Pairs: 1.895 ms
-Tiempo Total = 1261.783 ms
+Iteracion 0/256 encontrado 16 SR Pairs. Encontrados 16 nuevos pares consiguiendo 16/130.
+Babai tarda: 10.422 ms
+La definicion del problema tarda: 28.747 ms
+QAOA tarda: 1194.561 ms
+Samplear tarda: 41.047 ms
+Obtener los SR-Pairs: 1.685 ms
+Tiempo Total = 1276.463 ms
 
-Iteracion 1/256 encontrado 7 SR Pairs. Encontrados 4 nuevos pares consiguiendo 18/130.
-Babai tarda: 0.499 ms
-La definicion del problema tarda: 8.776 ms
-QAOA tarda: 1357.263 ms
-Samplear tarda: 28.966 ms
-Obtener los SR-Pairs: 1.553 ms
-Tiempo Total = 1397.057 ms
-
-Iteracion 2/256 encontrado 15 SR Pairs. Encontrados 8 nuevos pares consiguiendo 26/130.
-Babai tarda: 0.580 ms
-La definicion del problema tarda: 10.539 ms
-QAOA tarda: 1223.300 ms
-Samplear tarda: 29.290 ms
-Obtener los SR-Pairs: 1.526 ms
-Tiempo Total = 1265.234 ms
-
-Iteracion 3/256 encontrado 16 SR Pairs. Encontrados 13 nuevos pares consiguiendo 39/130.
-Babai tarda: 0.477 ms
-La definicion del problema tarda: 8.437 ms
-QAOA tarda: 1280.382 ms
-Samplear tarda: 32.971 ms
-Obtener los SR-Pairs: 1.052 ms
-Tiempo Total = 1323.319 ms
-
-Iteracion 4/256 encontrado 8 SR Pairs. Encontrados 4 nuevos pares consiguiendo 43/130.
-Babai tarda: 0.372 ms
-La definicion del problema tarda: 6.345 ms
-QAOA tarda: 1026.952 ms
-Samplear tarda: 25.720 ms
-Obtener los SR-Pairs: 1.437 ms
-Tiempo Total = 1060.826 ms
-
-Iteracion 5/256 encontrado 14 SR Pairs. Encontrados 8 nuevos pares consiguiendo 51/130.
-Babai tarda: 0.414 ms
-La definicion del problema tarda: 6.541 ms
-QAOA tarda: 1172.639 ms
-Samplear tarda: 30.790 ms
-Obtener los SR-Pairs: 1.453 ms
-Tiempo Total = 1211.837 ms
-
-Iteracion 6/256 encontrado 16 SR Pairs. Encontrados 6 nuevos pares consiguiendo 57/130.
-Babai tarda: 0.436 ms
-La definicion del problema tarda: 7.318 ms
-QAOA tarda: 1285.085 ms
-Samplear tarda: 27.362 ms
-Obtener los SR-Pairs: 1.533 ms
-Tiempo Total = 1321.733 ms
-
-Iteracion 7/256 encontrado 20 SR Pairs. Encontrados 10 nuevos pares consiguiendo 67/130.
-Babai tarda: 0.487 ms
-La definicion del problema tarda: 6.416 ms
-QAOA tarda: 1375.723 ms
-Samplear tarda: 28.027 ms
-Obtener los SR-Pairs: 1.761 ms
-Tiempo Total = 1412.414 ms
-
-Iteracion 8/256 encontrado 15 SR Pairs. Encontrados 3 nuevos pares consiguiendo 70/130.
-Babai tarda: 0.435 ms
-La definicion del problema tarda: 7.130 ms
-QAOA tarda: 1304.410 ms
-Samplear tarda: 37.988 ms
-Obtener los SR-Pairs: 1.325 ms
-Tiempo Total = 1351.288 ms
-
-Iteracion 9/256 encontrado 10 SR Pairs. Encontrados 0 nuevos pares consiguiendo 70/130.
-Babai tarda: 0.460 ms
-La definicion del problema tarda: 6.714 ms
-QAOA tarda: 1505.574 ms
-Samplear tarda: 30.675 ms
-Obtener los SR-Pairs: 1.234 ms
-Tiempo Total = 1544.657 ms
-
-Iteracion 10/256 encontrado 10 SR Pairs. Encontrados 0 nuevos pares consiguiendo 70/130.
-Babai tarda: 0.408 ms
-La definicion del problema tarda: 7.834 ms
-QAOA tarda: 1119.830 ms
-Samplear tarda: 27.233 ms
-Obtener los SR-Pairs: 1.655 ms
-Tiempo Total = 1156.960 ms
-
-Iteracion 11/256 encontrado 4 SR Pairs. Encontrados 2 nuevos pares consiguiendo 72/130.
-Babai tarda: 0.491 ms
-La definicion del problema tarda: 8.859 ms
-QAOA tarda: 1363.932 ms
-Samplear tarda: 45.166 ms
-Obtener los SR-Pairs: 1.820 ms
-Tiempo Total = 1420.268 ms
-
-Iteracion 12/256 encontrado 12 SR Pairs. Encontrados 1 nuevos pares consiguiendo 73/130.
-Babai tarda: 0.527 ms
-La definicion del problema tarda: 10.313 ms
-QAOA tarda: 1586.382 ms
-Samplear tarda: 26.046 ms
-Obtener los SR-Pairs: 1.259 ms
-Tiempo Total = 1624.525 ms
-
-Iteracion 13/256 encontrado 4 SR Pairs. Encontrados 0 nuevos pares consiguiendo 73/130.
-Babai tarda: 0.596 ms
-La definicion del problema tarda: 7.511 ms
-QAOA tarda: 1201.219 ms
-Samplear tarda: 40.483 ms
-Obtener los SR-Pairs: 1.915 ms
-Tiempo Total = 1251.723 ms
-
-Iteracion 14/256 encontrado 8 SR Pairs. Encontrados 5 nuevos pares consiguiendo 78/130.
-Babai tarda: 0.697 ms
-La definicion del problema tarda: 12.091 ms
-QAOA tarda: 1292.575 ms
-Samplear tarda: 34.154 ms
-Obtener los SR-Pairs: 1.496 ms
-Tiempo Total = 1341.013 ms
-
-Iteracion 15/256 encontrado 17 SR Pairs. Encontrados 9 nuevos pares consiguiendo 87/130.
-Babai tarda: 0.501 ms
-La definicion del problema tarda: 9.163 ms
-QAOA tarda: 1222.050 ms
-Samplear tarda: 22.239 ms
-Obtener los SR-Pairs: 1.129 ms
-Tiempo Total = 1255.082 ms
-
-Iteracion 16/256 encontrado 17 SR Pairs. Encontrados 4 nuevos pares consiguiendo 91/130.
-Babai tarda: 0.445 ms
-La definicion del problema tarda: 8.726 ms
-QAOA tarda: 1266.021 ms
-Samplear tarda: 25.733 ms
-Obtener los SR-Pairs: 1.077 ms
-Tiempo Total = 1302.003 ms
-
-Iteracion 17/256 encontrado 14 SR Pairs. Encontrados 2 nuevos pares consiguiendo 93/130.
-Babai tarda: 0.393 ms
-La definicion del problema tarda: 7.039 ms
-QAOA tarda: 1138.276 ms
-Samplear tarda: 25.946 ms
-Obtener los SR-Pairs: 1.241 ms
-Tiempo Total = 1172.895 ms
-
-Iteracion 18/256 encontrado 16 SR Pairs. Encontrados 4 nuevos pares consiguiendo 97/130.
-Babai tarda: 0.405 ms
-La definicion del problema tarda: 6.089 ms
-QAOA tarda: 1240.370 ms
-Samplear tarda: 25.988 ms
-Obtener los SR-Pairs: 1.101 ms
-Tiempo Total = 1273.954 ms
-
-Iteracion 19/256 encontrado 12 SR Pairs. Encontrados 3 nuevos pares consiguiendo 100/130.
-Babai tarda: 0.411 ms
-La definicion del problema tarda: 6.959 ms
-QAOA tarda: 1072.867 ms
-Samplear tarda: 26.628 ms
-Obtener los SR-Pairs: 1.795 ms
-Tiempo Total = 1108.660 ms
-
-Iteracion 20/256 encontrado 11 SR Pairs. Encontrados 4 nuevos pares consiguiendo 104/130.
-Babai tarda: 0.405 ms
-La definicion del problema tarda: 6.130 ms
-QAOA tarda: 1298.885 ms
-Samplear tarda: 34.628 ms
-Obtener los SR-Pairs: 1.063 ms
-Tiempo Total = 1341.111 ms
-
-Iteracion 21/256 encontrado 15 SR Pairs. Encontrados 1 nuevos pares consiguiendo 105/130.
+Iteracion 1/256 encontrado 11 SR Pairs. Encontrados 11 nuevos pares consiguiendo 27/130.
 Babai tarda: 0.371 ms
-La definicion del problema tarda: 8.002 ms
-QAOA tarda: 1147.310 ms
-Samplear tarda: 26.211 ms
-Obtener los SR-Pairs: 1.151 ms
-Tiempo Total = 1183.044 ms
+La definicion del problema tarda: 6.209 ms
+QAOA tarda: 1135.846 ms
+Samplear tarda: 38.180 ms
+Obtener los SR-Pairs: 1.404 ms
+Tiempo Total = 1182.010 ms
 
-Iteracion 22/256 encontrado 13 SR Pairs. Encontrados 4 nuevos pares consiguiendo 109/130.
-Babai tarda: 0.374 ms
-La definicion del problema tarda: 8.049 ms
-QAOA tarda: 1188.723 ms
-Samplear tarda: 32.669 ms
-Obtener los SR-Pairs: 1.095 ms
-Tiempo Total = 1230.911 ms
+Iteracion 2/256 encontrado 26 SR Pairs. Encontrados 22 nuevos pares consiguiendo 49/130.
+Babai tarda: 0.461 ms
+La definicion del problema tarda: 6.590 ms
+QAOA tarda: 1026.786 ms
+Samplear tarda: 34.411 ms
+Obtener los SR-Pairs: 1.645 ms
+Tiempo Total = 1069.893 ms
 
-Iteracion 23/256 encontrado 8 SR Pairs. Encontrados 2 nuevos pares consiguiendo 111/130.
-Babai tarda: 0.398 ms
-La definicion del problema tarda: 6.516 ms
-QAOA tarda: 1260.474 ms
-Samplear tarda: 33.444 ms
-Obtener los SR-Pairs: 1.076 ms
-Tiempo Total = 1301.908 ms
+Iteracion 3/256 encontrado 14 SR Pairs. Encontrados 5 nuevos pares consiguiendo 54/130.
+Babai tarda: 0.497 ms
+La definicion del problema tarda: 13.711 ms
+QAOA tarda: 1027.680 ms
+Samplear tarda: 29.756 ms
+Obtener los SR-Pairs: 1.276 ms
+Tiempo Total = 1072.920 ms
 
-Iteracion 24/256 encontrado 13 SR Pairs. Encontrados 2 nuevos pares consiguiendo 113/130.
-Babai tarda: 0.378 ms
-La definicion del problema tarda: 7.563 ms
-QAOA tarda: 1253.114 ms
-Samplear tarda: 28.978 ms
-Obtener los SR-Pairs: 1.527 ms
-Tiempo Total = 1291.559 ms
+Iteracion 4/256 encontrado 13 SR Pairs. Encontrados 4 nuevos pares consiguiendo 58/130.
+Babai tarda: 0.420 ms
+La definicion del problema tarda: 8.001 ms
+QAOA tarda: 1182.752 ms
+Samplear tarda: 27.065 ms
+Obtener los SR-Pairs: 1.505 ms
+Tiempo Total = 1219.743 ms
 
-Iteracion 25/256 encontrado 10 SR Pairs. Encontrados 3 nuevos pares consiguiendo 116/130.
-Babai tarda: 0.446 ms
-La definicion del problema tarda: 6.323 ms
-QAOA tarda: 1214.756 ms
-Samplear tarda: 27.416 ms
-Obtener los SR-Pairs: 1.211 ms
-Tiempo Total = 1250.151 ms
+Iteracion 5/256 encontrado 19 SR Pairs. Encontrados 5 nuevos pares consiguiendo 63/130.
+Babai tarda: 0.456 ms
+La definicion del problema tarda: 14.227 ms
+QAOA tarda: 1198.005 ms
+Samplear tarda: 28.113 ms
+Obtener los SR-Pairs: 1.058 ms
+Tiempo Total = 1241.859 ms
 
-Iteracion 26/256 encontrado 17 SR Pairs. Encontrados 7 nuevos pares consiguiendo 123/130.
-Babai tarda: 0.419 ms
-La definicion del problema tarda: 6.379 ms
-QAOA tarda: 1277.854 ms
-Samplear tarda: 27.498 ms
-Obtener los SR-Pairs: 1.477 ms
-Tiempo Total = 1313.626 ms
+Iteracion 6/256 encontrado 10 SR Pairs. Encontrados 4 nuevos pares consiguiendo 67/130.
+Babai tarda: 0.362 ms
+La definicion del problema tarda: 6.711 ms
+QAOA tarda: 1009.308 ms
+Samplear tarda: 33.346 ms
+Obtener los SR-Pairs: 1.019 ms
+Tiempo Total = 1050.747 ms
 
-Iteracion 27/256 encontrado 11 SR Pairs. Encontrados 2 nuevos pares consiguiendo 125/130.
-Babai tarda: 0.449 ms
-La definicion del problema tarda: 6.815 ms
-QAOA tarda: 1147.602 ms
-Samplear tarda: 28.065 ms
-Obtener los SR-Pairs: 1.191 ms
-Tiempo Total = 1184.122 ms
-
-Iteracion 28/256 encontrado 9 SR Pairs. Encontrados 1 nuevos pares consiguiendo 126/130.
-Babai tarda: 0.624 ms
-La definicion del problema tarda: 6.216 ms
-QAOA tarda: 1180.499 ms
-Samplear tarda: 26.403 ms
-Obtener los SR-Pairs: 1.358 ms
-Tiempo Total = 1215.100 ms
-
-Iteracion 29/256 encontrado 18 SR Pairs. Encontrados 2 nuevos pares consiguiendo 128/130.
-Babai tarda: 0.652 ms
-La definicion del problema tarda: 6.832 ms
-QAOA tarda: 1105.280 ms
-Samplear tarda: 30.457 ms
-Obtener los SR-Pairs: 1.121 ms
-Tiempo Total = 1144.342 ms
-
-Iteracion 30/256 encontrado 12 SR Pairs. Encontrados 1 nuevos pares consiguiendo 129/130.
-Babai tarda: 0.464 ms
-La definicion del problema tarda: 7.671 ms
-QAOA tarda: 1106.066 ms
-Samplear tarda: 27.804 ms
+Iteracion 7/256 encontrado 6 SR Pairs. Encontrados 3 nuevos pares consiguiendo 70/130.
+Babai tarda: 0.363 ms
+La definicion del problema tarda: 8.308 ms
+QAOA tarda: 1147.881 ms
+Samplear tarda: 27.928 ms
 Obtener los SR-Pairs: 1.186 ms
-Tiempo Total = 1143.191 ms
+Tiempo Total = 1185.665 ms
 
-Iteracion 31/256 encontrado 8 SR Pairs. Encontrados 1 nuevos pares consiguiendo 130/130.
-Babai tarda: 0.408 ms
-La definicion del problema tarda: 6.290 ms
-QAOA tarda: 1146.918 ms
-Samplear tarda: 29.414 ms
-Obtener los SR-Pairs: 1.182 ms
-Tiempo Total = 1184.212 ms
+Iteracion 8/256 encontrado 11 SR Pairs. Encontrados 6 nuevos pares consiguiendo 76/130.
+Babai tarda: 0.351 ms
+La definicion del problema tarda: 7.380 ms
+QAOA tarda: 1149.085 ms
+Samplear tarda: 29.384 ms
+Obtener los SR-Pairs: 1.293 ms
+Tiempo Total = 1187.493 ms
+
+Iteracion 9/256 encontrado 12 SR Pairs. Encontrados 2 nuevos pares consiguiendo 78/130.
+Babai tarda: 0.406 ms
+La definicion del problema tarda: 6.748 ms
+QAOA tarda: 979.141 ms
+Samplear tarda: 30.413 ms
+Obtener los SR-Pairs: 2.098 ms
+Tiempo Total = 1018.806 ms
+
+Iteracion 10/256 encontrado 13 SR Pairs. Encontrados 2 nuevos pares consiguiendo 80/130.
+Babai tarda: 0.511 ms
+La definicion del problema tarda: 7.086 ms
+QAOA tarda: 1175.860 ms
+Samplear tarda: 28.129 ms
+Obtener los SR-Pairs: 1.501 ms
+Tiempo Total = 1213.086 ms
+
+Iteracion 11/256 encontrado 11 SR Pairs. Encontrados 1 nuevos pares consiguiendo 81/130.
+Babai tarda: 0.432 ms
+La definicion del problema tarda: 8.204 ms
+QAOA tarda: 1212.785 ms
+Samplear tarda: 26.495 ms
+Obtener los SR-Pairs: 1.235 ms
+Tiempo Total = 1249.150 ms
+
+Iteracion 12/256 encontrado 15 SR Pairs. Encontrados 5 nuevos pares consiguiendo 86/130.
+Babai tarda: 0.403 ms
+La definicion del problema tarda: 7.458 ms
+QAOA tarda: 1111.632 ms
+Samplear tarda: 23.665 ms
+Obtener los SR-Pairs: 1.540 ms
+Tiempo Total = 1144.698 ms
+
+Iteracion 13/256 encontrado 10 SR Pairs. Encontrados 1 nuevos pares consiguiendo 87/130.
+Babai tarda: 0.406 ms
+La definicion del problema tarda: 7.660 ms
+QAOA tarda: 1222.883 ms
+Samplear tarda: 30.612 ms
+Obtener los SR-Pairs: 1.377 ms
+Tiempo Total = 1262.937 ms
+
+Iteracion 14/256 encontrado 19 SR Pairs. Encontrados 4 nuevos pares consiguiendo 91/130.
+Babai tarda: 0.430 ms
+La definicion del problema tarda: 7.649 ms
+QAOA tarda: 1203.297 ms
+Samplear tarda: 24.046 ms
+Obtener los SR-Pairs: 1.079 ms
+Tiempo Total = 1236.501 ms
+
+Iteracion 15/256 encontrado 12 SR Pairs. Encontrados 5 nuevos pares consiguiendo 96/130.
+Babai tarda: 0.376 ms
+La definicion del problema tarda: 6.391 ms
+QAOA tarda: 1131.214 ms
+Samplear tarda: 26.928 ms
+Obtener los SR-Pairs: 1.069 ms
+Tiempo Total = 1165.978 ms
+
+Iteracion 16/256 encontrado 16 SR Pairs. Encontrados 1 nuevos pares consiguiendo 97/130.
+Babai tarda: 0.361 ms
+La definicion del problema tarda: 6.961 ms
+QAOA tarda: 1272.735 ms
+Samplear tarda: 26.311 ms
+Obtener los SR-Pairs: 1.130 ms
+Tiempo Total = 1307.499 ms
+
+Iteracion 17/256 encontrado 15 SR Pairs. Encontrados 1 nuevos pares consiguiendo 98/130.
+Babai tarda: 0.448 ms
+La definicion del problema tarda: 6.318 ms
+QAOA tarda: 1295.251 ms
+Samplear tarda: 22.192 ms
+Obtener los SR-Pairs: 1.107 ms
+Tiempo Total = 1325.316 ms
+
+Iteracion 18/256 encontrado 16 SR Pairs. Encontrados 0 nuevos pares consiguiendo 98/130.
+Babai tarda: 0.364 ms
+La definicion del problema tarda: 7.414 ms
+QAOA tarda: 1111.825 ms
+Samplear tarda: 38.995 ms
+Obtener los SR-Pairs: 1.094 ms
+Tiempo Total = 1159.692 ms
+
+Iteracion 19/256 encontrado 21 SR Pairs. Encontrados 5 nuevos pares consiguiendo 103/130.
+Babai tarda: 0.361 ms
+La definicion del problema tarda: 6.233 ms
+QAOA tarda: 1369.496 ms
+Samplear tarda: 27.203 ms
+Obtener los SR-Pairs: 0.986 ms
+Tiempo Total = 1404.279 ms
+
+Iteracion 20/256 encontrado 7 SR Pairs. Encontrados 1 nuevos pares consiguiendo 104/130.
+Babai tarda: 0.340 ms
+La definicion del problema tarda: 6.124 ms
+QAOA tarda: 1277.683 ms
+Samplear tarda: 30.519 ms
+Obtener los SR-Pairs: 1.128 ms
+Tiempo Total = 1315.794 ms
+
+Iteracion 21/256 encontrado 9 SR Pairs. Encontrados 2 nuevos pares consiguiendo 106/130.
+Babai tarda: 0.351 ms
+La definicion del problema tarda: 6.465 ms
+QAOA tarda: 1496.786 ms
+Samplear tarda: 29.402 ms
+Obtener los SR-Pairs: 1.074 ms
+Tiempo Total = 1534.079 ms
+
+Iteracion 22/256 encontrado 7 SR Pairs. Encontrados 1 nuevos pares consiguiendo 107/130.
+Babai tarda: 0.352 ms
+La definicion del problema tarda: 5.952 ms
+QAOA tarda: 1412.131 ms
+Samplear tarda: 34.186 ms
+Obtener los SR-Pairs: 1.031 ms
+Tiempo Total = 1453.652 ms
+
+Iteracion 23/256 encontrado 13 SR Pairs. Encontrados 3 nuevos pares consiguiendo 110/130.
+Babai tarda: 0.353 ms
+La definicion del problema tarda: 7.045 ms
+QAOA tarda: 1295.146 ms
+Samplear tarda: 29.340 ms
+Obtener los SR-Pairs: 1.016 ms
+Tiempo Total = 1332.899 ms
+
+Iteracion 24/256 encontrado 10 SR Pairs. Encontrados 3 nuevos pares consiguiendo 113/130.
+Babai tarda: 0.345 ms
+La definicion del problema tarda: 6.340 ms
+QAOA tarda: 1379.488 ms
+Samplear tarda: 26.807 ms
+Obtener los SR-Pairs: 1.020 ms
+Tiempo Total = 1414.000 ms
+
+Iteracion 25/256 encontrado 22 SR Pairs. Encontrados 3 nuevos pares consiguiendo 116/130.
+Babai tarda: 0.345 ms
+La definicion del problema tarda: 6.652 ms
+QAOA tarda: 1222.223 ms
+Samplear tarda: 31.644 ms
+Obtener los SR-Pairs: 1.118 ms
+Tiempo Total = 1261.982 ms
+
+Iteracion 26/256 encontrado 26 SR Pairs. Encontrados 4 nuevos pares consiguiendo 120/130.
+Babai tarda: 0.358 ms
+La definicion del problema tarda: 6.403 ms
+QAOA tarda: 1319.093 ms
+Samplear tarda: 29.716 ms
+Obtener los SR-Pairs: 1.008 ms
+Tiempo Total = 1356.578 ms
+
+Iteracion 27/256 encontrado 14 SR Pairs. Encontrados 1 nuevos pares consiguiendo 121/130.
+Babai tarda: 0.354 ms
+La definicion del problema tarda: 7.793 ms
+QAOA tarda: 1414.539 ms
+Samplear tarda: 27.405 ms
+Obtener los SR-Pairs: 1.038 ms
+Tiempo Total = 1451.128 ms
+
+Iteracion 28/256 encontrado 14 SR Pairs. Encontrados 3 nuevos pares consiguiendo 124/130.
+Babai tarda: 0.354 ms
+La definicion del problema tarda: 7.421 ms
+QAOA tarda: 1511.676 ms
+Samplear tarda: 28.305 ms
+Obtener los SR-Pairs: 1.144 ms
+Tiempo Total = 1548.901 ms
+
+Iteracion 29/256 encontrado 18 SR Pairs. Encontrados 6 nuevos pares consiguiendo 130/130.
+Babai tarda: 0.371 ms
+La definicion del problema tarda: 6.940 ms
+QAOA tarda: 1410.966 ms
+Samplear tarda: 30.678 ms
+Obtener los SR-Pairs: 1.130 ms
+Tiempo Total = 1450.085 ms
 

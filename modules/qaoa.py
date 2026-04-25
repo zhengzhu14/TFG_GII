@@ -94,18 +94,23 @@ def circ_asign_params(circuit, parameters):
         return ncircuit
 
 
-def evaluate_params(circuit, Hc, x):
+def evaluate_params(circuit, Hc, x, sim = None):
 
-    simulator = EstimatorV2(options = {'backend_options': 
-                                            {'method': 'statevector',
+    if sim == None: 
+        simulator = EstimatorV2(options = {'backend_options': 
+                                            {'method': 'automatic',
                                              'device': 'CPU',
-                                             'max_parallel_threads': 8
+                                             'max_parallel_threads': 0,
+                                             'max_parallel_experiments': 0,
                                             }})
+    else: 
+        simulator = sim
     
-    pub = (circuit, Hc, x)
+    pub = (circuit, Hc , x)
 
-    result = simulator.run([pub]).result()[0].data.evs
-    
+    results = simulator.run([pub]).result()
+    result = results[0].data.evs
+
     return result
 
 def qaoa_algorithm(circuit, Hc, x0 = None, min_method = 'Nelder-Mead'):
@@ -114,9 +119,10 @@ def qaoa_algorithm(circuit, Hc, x0 = None, min_method = 'Nelder-Mead'):
     """
 
     simulator = EstimatorV2(options = {'backend_options': 
-                                            {'method': 'statevector',
+                                            {'method': 'automatic',
                                              'device': 'CPU',
-                                             'max_parallel_threads': 8
+                                             'max_parallel_threads': 0,
+                                             'max_parallel_experiments': 0,
                                             }}) #Instancio el simulador exacto sin ruido
 
     def func_to_minimize(x):

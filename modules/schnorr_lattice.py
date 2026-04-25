@@ -3,7 +3,7 @@ import numpy as np
 from copy import deepcopy
 import matplotlib.pyplot as plt
 from fpylll import IntegerMatrix, LLL, GSO
-from math import log2, ceil
+from math import log2, ceil, floor
 from dataclasses import dataclass
 
 
@@ -46,7 +46,7 @@ class schnorrCVP:
         self.l = l
 
         self.m = int(ceil(log2(self.N)))
-        self.n = int(round((self.l*self.m) / ceil(log2(self.m))))
+        self.n = int(round((self.l*log2(self.N)) / log2(log2(self.N))))
 
         self.smooth_bound = 2*self.n**2
 
