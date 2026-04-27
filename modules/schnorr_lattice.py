@@ -39,7 +39,7 @@ class schnorrCVP:
 
         self.seed = seed
         if set_seed:
-            np.random.seed = seed
+            np.random.seed(seed)
         
         
 
@@ -218,7 +218,7 @@ class schnorrCVP:
     #Setters
     def set_random_seed(self, seed):
         self.seed = seed
-        np.random.seed = self.seed
+        np.random.seed(self.seed)
 
     def set_n(self, n):
         self.n = n

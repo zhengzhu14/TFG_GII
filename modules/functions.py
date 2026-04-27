@@ -13,9 +13,19 @@ from modules import qaoa
 from modules import utils
 
 
+def get_shots(n_qubits):
+    if n_qubits <= 7:
+        return 1_000
+    elif n_qubits <= 15:
+        return 10_000
+    else:
+        return 100_000
+    
+    
+
 def solve_cvp (
     cvp : sl.schnorrCVP, instance: sl.schnorrCVPInstance, 
-    x0 = None, delta = 0.75, shots = 10_000, normalize: bool = False, 
+    x0 = None, delta = 0.75, normalize: bool = False, 
     p = 1, min_method = 'Nelder-Mead'
 ):
     """
@@ -35,6 +45,10 @@ def solve_cvp (
     #Optimizacion clasica
     _, opt_parameters = qaoa.qaoa_algorithm(circuit, Hc, x0, min_method = min_method)
 
+    
+    #Obtengo una cantidad de shots adecuada en función de los qubits
+    shots = get_shots(circuit.num_qubits)
+
     counts = qaoa.sample_from_parameters(circuit, opt_parameters, shots) # Obtengo un diccionario para obtener los bitstring
 
     nD = sl.integer_to_matrix(babai_result.D)
@@ -50,7 +64,7 @@ def solve_cvp (
 
 def solve_cvp_with_opt_paramters(
     cvp : sl.schnorrCVP, instance: sl.schnorrCVPInstance,
-    opt_parameters, delta = 0.75, shots = 10_000, normalize: bool = False,
+    opt_parameters, delta = 0.75, normalize: bool = False,
     p = 1
 ):
     """
@@ -69,6 +83,9 @@ def solve_cvp_with_opt_paramters(
 
     #Nos ahorramos la parte de la optimizacion clasica
 
+    #Obtengo una cantidad de shots adecuada en función de los qubits
+    shots = get_shots(circuit.num_qubits)
+    
     counts = qaoa.sample_from_parameters(circuit, opt_parameters, shots)
 
 
