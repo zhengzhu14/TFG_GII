@@ -18,8 +18,10 @@ def get_shots(n_qubits):
         return 1_000
     elif n_qubits <= 15:
         return 10_000
-    else:
+    elif n_qubits <= 20:
         return 100_000
+    else:
+        return 1_000_000
     
     
 
