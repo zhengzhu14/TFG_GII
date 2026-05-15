@@ -117,7 +117,6 @@ def qaoa_algorithm(circuit, Hc, x0 = None, min_method = 'Nelder-Mead'):
     """
     TODO
     """
-
     simulator = EstimatorV2(options = {'backend_options': 
                                             {'method': 'automatic',
                                              'device': 'CPU',
