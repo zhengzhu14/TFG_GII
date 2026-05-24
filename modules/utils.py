@@ -3,7 +3,6 @@ from Crypto.Util import number
 import random
 
 
-
 def get_probs(counts, shots):
 
     return [count/shots for count in counts]

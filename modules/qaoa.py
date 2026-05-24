@@ -1,14 +1,8 @@
 #Librerias de Qiskit
 from qiskit_optimization.translators import from_docplex_mp
 
-
-from qiskit_aer import AerSimulator
 from qiskit_aer.primitives import EstimatorV2, SamplerV2
-from qiskit.transpiler import generate_preset_pass_manager
-
-
 from qiskit.circuit.library import qaoa_ansatz
-
 
 from docplex.mp.model import Model
 

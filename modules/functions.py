@@ -1,13 +1,4 @@
 #Importaciones basicas
-import numpy as np
-from copy import deepcopy
-from scipy.optimize import minimize
-import matplotlib.pyplot as plt
-
-from fpylll import IntegerMatrix, LLL, GSO
-from docplex.mp.model import Model
-
-
 from modules import schnorr_lattice as sl
 from modules import qaoa
 from modules import utils
