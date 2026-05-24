@@ -11,6 +11,27 @@ from scipy.optimize import minimize, OptimizeResult
 import numpy as np
 
 
+"""
+En este módulo se define todo las funciones para implementar el QAOA mediante Qiskit.
+
+- Clase QaoaMonitor: clase monitor que contiene la informacion del bucle variacional del algoritmo QAOA.
+
+- Funcion define_qubo(D, residual_vector, step_signs, n): devuelve la formulacion QUBO del problema.
+- Funcion define_hamiltonian(qubo_p): calcula el Hamiltoniano de coste asociado a la funcion QUBO.
+- Funcion construct_circuit(Hc, reps): construye el circuito parametrizado o Ansatze.
+- Funcion evaluate_params(circuit, Hc, x, sim = None): dado unos parametros estimar la energia.
+
+- Funcion qaoa_algorithm(circuit, Hc, x0, min_method): realiza toda la ejecucion del algoritmo de QAOA y devuelve 
+    los parámetros optimos.
+
+- Funcion sample_from_parameters(circuit, opt_parameters, shots): devuelve la distribucion aproximada de bitstrings
+    del estado generado a partir de los parametros optimos.
+    
+- Funcion normalize_hamiltonian(Hc): normaliza el Hamiltoniano de coste.
+
+"""
+
+
 class QaoaMonitor:
     def __init__ (self):
         self.evaluation = []
@@ -69,16 +90,12 @@ def define_qubo(D, residual_vector, step_signs, n):
 
 
 def define_hamiltonian(qubo_p):
-
     op, offset = qubo_p.to_ising()
-
     return op, offset
 
 
 def construct_circuit(Hc, reps = 1):
-
     circuit = qaoa_ansatz(cost_operator = Hc, reps = reps)
-
     return circuit
 
 
@@ -89,6 +106,10 @@ def circ_asign_params(circuit, parameters):
 
 
 def evaluate_params(circuit, Hc, x, sim = None):
+    """
+    Calcula la energia estimada de un circuito circuit con los parametros x 
+    respecto del Hamiltoniano de coste  Hc.
+    """
 
     if sim == None: 
         simulator = EstimatorV2(options = {'backend_options': 
@@ -109,7 +130,15 @@ def evaluate_params(circuit, Hc, x, sim = None):
 
 def qaoa_algorithm(circuit, Hc, x0 = None, min_method = 'Nelder-Mead'):
     """
-    TODO
+    Realiza la ejecución de todo el algoritmo de QAOA.
+
+    param circuit: circuito parametrizado o Ansatze
+    param Hc: Hamiltoniano de coste
+    param x0: parametros iniciales si procede
+    param min_method: optimizador clasico a utilizar.
+
+    return monitor: informacion del bucle variacional
+           opt_parameters: angulos optimos
     """
     simulator = EstimatorV2(options = {'backend_options': 
                                             {'method': 'automatic',
@@ -145,7 +174,16 @@ def qaoa_algorithm(circuit, Hc, x0 = None, min_method = 'Nelder-Mead'):
 
 def sample_from_parameters(circuit, opt_parameters, shots):
     """
-    TODO
+    Toma un circuito y realiza shots mediciones para obtener una distribucion de estados básicos
+    que represente el estado cuántico.
+
+    param circuit: circuito parametrizado
+    param opt_parameters: parametros optimos del QAOA
+    param shots: numero de shots a realizar
+
+
+    return {bitstring: count}: diccionario de estados medidos y la cantidad de veces medidas 
+
     """
 
     sampler = SamplerV2() #Declaro un Sampler exacto
@@ -171,6 +209,10 @@ def sample_from_parameters(circuit, opt_parameters, shots):
 
 
 def normalize_hamiltonian(Hc):
+    """
+    Función que normaliza los coeficientes del Hamiltoniano por el mayor coeficiente en valor absoluto
+    """
+
     norma = np.max(np.abs(Hc.coeffs))
 
     nHc = Hc.copy()

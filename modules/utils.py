@@ -3,6 +3,11 @@ from Crypto.Util import number
 import random
 
 
+"""
+Modulo con funciones auxiliares utiles tanto para el algoritmo de criba como el modelo de preentreno
+"""
+
+
 def get_probs(counts, shots):
 
     return [count/shots for count in counts]

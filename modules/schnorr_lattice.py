@@ -7,7 +7,27 @@ from dataclasses import dataclass
 
 
 """
-TODO
+En este módulo se definen las funciones de la parte clásica del algoritmo de Schnorr
+- Clase schnorrCVPInstance: guarda la informacion de una instancia CVP que contiene
+    - B: base del retículo
+    - t: vector objetivo
+- Clase schnorrCVPResult: guarda la información de la resolución clásica del problema CVP.
+    - D: base LLL reducida
+    - b_op: solución aproximada obtenida mediante el algoritmo de Babai
+    - res_vector: vector diferencia: t - b_op
+    - step_sign: vector Sign(mu_i - c_i) donde mu_i son los coeficientes calculados durante el algoritmo de Babai y c_i la aproximación tomada
+    - weight: vector de mu_i's
+    - delta: delta tomado para reducir la base
+
+- Clase schnorrCVP: contiene los parámetros de un problema y las funciones para aplicar el algoritmo de Schnoor
+
+- Funciones auxiliares relacionados:
+    - get_primes(n): genera una lista con los n primeros primos
+    - integer_to_matrix(B): convierte una IntegerMatrix de fpylll en una matriz numpy
+    - bitstrings2vector(bitstrings): convierte una lista de bitstrings en una lista de vectores de bits.
+    - bitstring2latticeVectors(D, state_bistrings, step_signs, b_op): convierte una lista de bitstrings en sus correspondientes vectores del retículo
+    - vectors2uv_pairs(B, vectors, n): convierte vectores del retículos en pares (u, v)
+    - uv_pairs2sr_pairs(uv_pairs, cvp: schnorrCVP): toma una lista de pares (u, v) y selecciona aquellos que sean SR-pairs.
 """
 
 
@@ -38,8 +58,6 @@ class schnorrCVP:
         if set_seed:
             np.random.seed(seed)
         
-        
-
         self.l = l
 
         self.m = int(ceil(log2(self.N)))
@@ -48,7 +66,6 @@ class schnorrCVP:
         self.smooth_bound = 2*self.n**2
 
         self.basis = get_primes(self.smooth_bound)
-
 
         if verbose :
             print(f'El numero de bits de N = {self.N} es m = {self.m}')
@@ -104,10 +121,51 @@ class schnorrCVP:
         return schnorrCVPInstance(B, t)
     
 
+    
 
     def __lll_reduction_personal(self, B, delta = 0.75):
-        #TODO
-        pass
+        """
+        Implementación propia del algoritmo de reduccion LLL.
+
+        param B: base del retículo
+        param delta: parametro de reduccion
+
+        return: D: base reducida
+                G: base ortogonal Gram Schmidt de la base reducida
+                mu: matriz de los coeficientes de Gram-Schmidt
+
+        """
+
+        D = deepcopy(B) #Primero creo una copia de B para trabajar con las columnas
+        G, mu = self.orthoGramSchmidt(B, self.n) #Calculo la ortogonalizacion de gram schmidt
+        
+        k = 1
+
+        while k < self.n:
+            for l in range(k - 1, -1, -1):
+                if abs(mu[k][l]) > 0.5:
+                    r = np.round(mu[k][l])
+                    D[k] = D[k] - r*D[l]
+                    #actualizar B ortho y sus coeficientes
+                    #G, mu = orthoGramSchmidt(D.T, n)
+                    self.reduction_update(mu, r, k, l)
+
+            bk = np.dot(G[k], G[k])
+            bkm = np.dot(G[k - 1], G[k - 1])
+            m = mu[k][k - 1]**2
+            if bk >= ((delta - m)*bkm):
+                k = k + 1
+            else: 
+                D[[k, k - 1]] = D[[k - 1, k]] # intercambio los dos vectores
+
+                #actualizar B orto y sus coeficientes 
+                #G, mu = orthoGramSchmidt(D.T, n)
+                self.lovasz_cond_update(G, mu, k)
+                
+                k = max(k - 1, 1)
+
+        return D, G, mu #Base reducida mas la base ortogonal
+        
 
 
     
@@ -195,6 +253,65 @@ class schnorrCVP:
         
         return Y
 
+    def orthoGramSchmidt(B, n):
+        D = deepcopy(B) #primero transpongo la matriz para tratar con los vectores de la base
+        longitudes = [] #creo una lista vacia para cada modulo al cuadrado de b* que pertenece a la base ortogonal
+        mu = np.eye(n) #Guardo los coeficientes inicializando la matriz a una identidad
+
+        for i in range(n):
+            b = D[i].copy()
+            for j in range(i):
+                u = np.dot(D[i], D[j]) / longitudes[j]
+                mu[i][j] = u
+                b = b - u*D[j]
+            
+            D[i] = b
+            aux = np.dot(b,b)
+            longitudes.append(aux)
+        
+        return D, mu
+
+    
+    def reduction_update(mu, r, k, l): 
+        #Funcion para actualizar los valores de mu cuando se realiza una Reduccion
+        mu[k][l] = mu[k][l] - r
+
+        for j in range(l - 1, -1, -1):
+            mu[k][j] = mu[k][j] - r*mu[l][j]
+    
+
+
+    def lovasz_cond_update(G, mu, k):
+        #Calculo los nuevos valores
+        bko = G[k].copy()
+        bkoMod2 = np.dot(bko, bko)
+        bk_1o = G[k - 1].copy()
+        bk_1oMod2 = np.dot(bk_1o, bk_1o)
+        mukk_1 = mu[k][k - 1]
+
+        ck_1o = bko + mukk_1*bk_1o
+        ck_1oMod2 = np.dot(ck_1o, ck_1o)
+
+        nmukk_1 = mukk_1*(bk_1oMod2/ck_1oMod2)
+
+        cko = bk_1o - nmukk_1*ck_1o
+
+        #Asigno los nuevos valores
+        G[k - 1] = ck_1o
+        G[k] = cko
+        mu[k][k - 1] = nmukk_1
+
+
+        #Modificar los coeficientes mu[i][k] y mu[i][k - 1] de i > k
+        auxMul = bkoMod2/ck_1oMod2
+        for i in range(k + 1, mu.shape[0]):
+            a, b = mu[i][k - 1], mu[i][k]   # leer solo una vez
+            mu[i][k - 1] = a*nmukk_1 + b*auxMul
+            mu[i][k]     = a - b*mukk_1
+
+        #Intercabiar los valores de mu[k - 1][j] y mu[k][j] para j < k - 1
+        for j in range(k - 1):
+            mu[k - 1][j], mu[k][j] = mu[k][j], mu[k - 1][j]
 
 
     #Getters
@@ -225,8 +342,12 @@ class schnorrCVP:
         self.basis = get_primes(self.smooth_bound)
 
 
-
 def get_primes(n):
+    """
+    param n: numero de primos de la base
+
+    return P_n: base de los n primeros primos
+    """
     if n < 1:
         return []
     primes = [2]
@@ -262,12 +383,16 @@ def integer_to_matrix(B):
 
 
 def bitstrings2vector(bitstrings):
+    """
+    Convierte una lista de bitstrings en una lista de vectores de bits.
+    """
+
     return np.array([[int(c) for c in reversed(bstring)] for bstring in bitstrings])
 
 
 def bitstring2latticeVectors(D, state_bistrings, step_signs, b_op):
     """
-    
+    Convierte una lista de bitstrings en una lista de los vectores del retículo que representan
     """
     bits = bitstrings2vector(state_bistrings) #Obtengo el vector de bits de la cadena
 
@@ -281,10 +406,12 @@ def bitstring2latticeVectors(D, state_bistrings, step_signs, b_op):
 
 
 
-
-#Funciones de teoria de numeros
-
 def vectors2uv_pairs(B, vectors, n):
+    """
+    Toma un conjunto de vectores del retículo y devuelve los pares (u, v) que representan respecto de la
+    base P_n
+    """
+
     base = get_primes(n)
 
     B_inv = np.linalg.pinv(B) #Calculo la matriz inversa
@@ -304,6 +431,9 @@ def vectors2uv_pairs(B, vectors, n):
 
 
 def uv_pairs2sr_pairs(uv_pairs, cvp: schnorrCVP):
+    """
+    Toma un conjunto de pares (u, v) y selecciona aquellos que sean SR-pairs.
+    """
 
     aux = [int(u_v[0]) - cvp.N*int(u_v[1]) for u_v in uv_pairs]
 

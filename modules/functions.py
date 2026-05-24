@@ -4,6 +4,18 @@ from modules import qaoa
 from modules import utils
 
 
+"""
+Modulo con las funciones que resuelven el CVP siguiendo la formulacion de Schnorr-Yan
+
+- Funcion: solve_cvp(cvp, instance, x0, delta, normalize, p, min_method): resuelve clasicamente el cvp y aplica el 
+        refinamiento por QAOA. Devuelve los vectores cercanos calculados, sus probabilidades, la solucion aproximada
+        y los angulos optimos para el QAOA.
+
+- Funcion solve_cvp_with_opt_paramters(cvp, instance, opt_parameters, delta, normalize, p): funcion que resuelve el cvp
+        sin pasar por el bucle variacional del QAOA sino mediante los ángulos fijos optimos calculados.
+
+"""
+
 def get_shots(n_qubits):
     if n_qubits <= 7:
         return 1_000
@@ -22,7 +34,20 @@ def solve_cvp (
     p = 1, min_method = 'Nelder-Mead'
 ):
     """
-    TODO
+    Aplica todo el pipeline del algoritmo de Shnorr junto al refinamiento cuantico de Yan et al.
+
+    param cvp: parametros del problema de factorizacion
+    param instance: instancia CVP
+    param x0: parametros iniciales si procede
+    param delta: parametro de la reduccion LLL
+    param normalize: booleano para indicar si normalizar o no el Hamiltoniano
+    param p: profundidad del ansatze del QAOA
+    param min_method: optimizador clasico a utilizar
+
+    return vnews: vectores de la vecindad de b_op mas cercanos a t
+           probs: las probabilidades de ser medidos de estos vectores
+           b_op: solucion aproximada del CVP
+           opt_parameters: angulos optimos calculados con el QAOA.
     """
 
     babai_result = cvp.babai_algorithm(instance, delta)
@@ -61,7 +86,20 @@ def solve_cvp_with_opt_paramters(
     p = 1
 ):
     """
-    TODO
+    Aplica todo el pipeline del algoritmo de Shnorr y elimina el bucle variacional del QAOA mediante 
+    el uso de angulos fijos previamente calculados
+
+    param cvp: parametros del problema de factorizacion
+    param instance: instancia CVP
+    param opt_parameters: angulos fijos optimos
+    param delta: parametro de la reduccion LLL
+    param normalize: booleano para indicar si normalizar o no el Hamiltoniano
+    param p: profundidad del ansatze del QAOA
+
+    return vnews: vectores de la vecindad de b_op mas cercanos a t
+           probs: las probabilidades de ser medidos de estos vectores.
+           b_op: solucion aproximada del CVP.
+           opt_parameters: angulos optimos.
     """
 
     babai_result = cvp.babai_algorithm(instance, delta)
